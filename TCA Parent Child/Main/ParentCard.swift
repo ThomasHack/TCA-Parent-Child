@@ -1,5 +1,5 @@
 //
-//  ChildView.swift
+//  ParentCard.swift
 //  
 //
 //
@@ -7,12 +7,12 @@
 import ComposableArchitecture
 import SwiftUI
 
-struct ChildView: View {
-    var store: Store<Child.State, Child.Action>
+struct ParentCard: View {
+    var store: Store<Parent.State, Parent.Action>
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            VStack {
+            NavigationLink(destination: ParentView(store: store)) {
                 HStack {
                     Text(viewStore.model?.name ?? "-")
                         .font(.headline)
@@ -20,40 +20,25 @@ struct ChildView: View {
                     HStack {
                         Button { viewStore.send(.decrement) } label: { Text("-") }
                             .foregroundColor(Color.secondary)
+                            .buttonStyle(PlainButtonStyle())
                         Text("\(viewStore.model?.value ?? -1)")
                             .frame(minWidth: 24)
                         Button { viewStore.send(.increment) } label: { Text("+") }
                             .foregroundColor(Color.secondary)
+                            .buttonStyle(PlainButtonStyle())
                     }
                     .padding(.vertical, 10)
                     .padding(.horizontal, 16)
                     .background(Color(.secondarySystemBackground))
                     .cornerRadius(15)
                 }
-                Spacer()
-
-                HStack {
-                    Text("Shared")
-                        .font(.headline)
-                    Spacer()
-                    HStack {
-                        Button { viewStore.send(.shared(.decrement)) } label: { Text("-") }
-                            .foregroundColor(Color.secondary)
-                        Text("\(viewStore.shared.value)")
-                            .frame(minWidth: 24)
-                        Button { viewStore.send(.shared(.increment)) } label: { Text("+") }
-                            .foregroundColor(Color.secondary)
-                    }
-                }
             }
-            .padding()
-            .navigationTitle(viewStore.model?.name ?? "-")
         }
     }
 }
 
-struct ChildView_Previews: PreviewProvider {
+struct ParentCard_Previews: PreviewProvider {
     static var previews: some View {
-        ChildView(store: Child.previewStore)
+        ParentCard(store: Parent.previewStore)
     }
 }

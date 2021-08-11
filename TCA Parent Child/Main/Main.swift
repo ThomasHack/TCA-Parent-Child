@@ -9,13 +9,27 @@ import Foundation
 
 enum Main {
     struct State: Equatable {
-        var models: IdentifiedArrayOf<Parent.ParentFeature> = []
+        var models: IdentifiedArrayOf<Parent.State> = []
+        var shared: Shared.State
+        var api: Api.State
+
+        public subscript<T>(dynamicMember keyPath: WritableKeyPath<Shared.State, T>) -> T {
+            get { shared[keyPath: keyPath] }
+            set { shared[keyPath: keyPath] = newValue }
+        }
+
+        public subscript<T>(dynamicMember keyPath: WritableKeyPath<Api.State, T>) -> T {
+            get { api[keyPath: keyPath] }
+            set { api[keyPath: keyPath] = newValue }
+        }
     }
 
     enum Action {
         case fetch
+        case reset
         case shared(Shared.Action)
-        case parent(id: Parent.ParentFeature.ID, action: Parent.Action)
+        case api(Api.Action)
+        case parent(id: Parent.State.ID, action: Parent.Action)
     }
 
     struct Environment {
@@ -26,18 +40,23 @@ enum Main {
         mainQueue: DispatchQueue.main.eraseToAnyScheduler()
     )
 
-    static let reducer = Reducer<MainFeature, Action, Environment>.combine(
+    static let reducer = Reducer<State, Action, Environment>.combine(
         Reducer { state, action, _ in
             switch action {
             case .fetch:
+                return Effect(value: .api(.fetchModels))
+
+            case .reset:
                 state.models = []
-                Mock.models.forEach { model in
+
+            case .api(.fetchModelsResponse(let models)):
+                state.models = []
+                models.forEach { model in
                     state.models.append(
-                        Parent.ParentFeature(id: UUID(), parent: Parent.State(model: model), shared: state.shared)
+                        Parent.State(model: model, shared: Shared.initialState, api: Api.initialState)
                     )
                 }
-
-            case .parent, .shared:
+            case .parent, .shared, .api:
                 break
             }
             return .none
@@ -45,6 +64,11 @@ enum Main {
         Shared.reducer.pullback(
             state: \.shared,
             action: /Action.shared,
+            environment: { $0 }
+        ),
+        Api.reducer.pullback(
+            state: \.api,
+            action: /Action.api,
             environment: { $0 }
         ),
         Parent.reducer.forEach(
@@ -55,18 +79,20 @@ enum Main {
     )
 
     static let store = Store(
-        initialState: Main.MainFeature(main: Main.initialState, shared: Shared.initialState),
+        initialState: State(shared: Shared.initialState, api: Api.initialState),
         reducer: Main.reducer,
         environment: Main.initialEnvironment
     )
 
-    static let initialState = State()
+    static let initialState = State(shared: Shared.initialState, api: Api.initialState)
 
-    static let previewState = MainFeature(
-        main: Main.State(models: [
-            .init(id: UUID(), parent: Parent.State(model: Model(id: UUID(), name: "Model 1", value: 0)), shared: Shared.initialState)
-        ]),
-        shared: Shared.initialState)
+    static let previewState = State(
+        models: [
+            .init(model: Mock.models.first, shared: Shared.initialState, api: Api.initialState)
+        ],
+        shared: Shared.initialState,
+        api: Api.initialState
+    )
 
     static let previewStore = Store(
         initialState: Main.previewState,

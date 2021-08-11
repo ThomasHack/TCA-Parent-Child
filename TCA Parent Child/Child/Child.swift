@@ -8,8 +8,15 @@ import ComposableArchitecture
 import Foundation
 
 enum Child {
-    struct State: Equatable {
+    struct State: Identifiable, Equatable {
+        let id = UUID()
         var model: ChildModel?
+        var shared: Shared.State
+
+        public subscript<T>(dynamicMember keyPath: WritableKeyPath<Shared.State, T>) -> T {
+            get { shared[keyPath: keyPath] }
+            set { shared[keyPath: keyPath] = newValue }
+        }
     }
 
     enum Action {
@@ -20,7 +27,7 @@ enum Child {
 
     typealias Environment = Main.Environment
 
-    static let reducer = Reducer<ChildFeature, Action, Environment>.combine(
+    static let reducer = Reducer<State, Action, Environment>.combine(
         Reducer { state, action, _ in
             switch action {
             case .increment:
@@ -41,9 +48,9 @@ enum Child {
         )
     )
 
-    static let initialState = State()
+    static let initialState = State(shared: Shared.initialState)
 
-    static let previewState = ChildFeature(id: UUID(), child: Child.State(model: ChildModel(id: UUID(), name: "Child Model", value: 0)), shared: Shared.initialState)
+    static let previewState = State(model: ChildModel(name: "Child Model", value: 0), shared: Shared.initialState)
 
     static let previewStore = Store(
         initialState: Child.previewState,

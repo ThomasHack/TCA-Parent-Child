@@ -14,6 +14,7 @@ struct TCA_Parent_ChildApp: App {
             NavigationView {
                 MainView(store: Main.store)
             }
+            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }

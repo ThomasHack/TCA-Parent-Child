@@ -8,37 +8,12 @@ import ComposableArchitecture
 import SwiftUI
 
 struct MainView: View {
-    var store: Store<Main.MainFeature, Main.Action>
+    var store: Store<Main.State, Main.Action>
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            VStack {
-                ForEachStore(self.store.scope(state: \.models, action: Main.Action.parent(id:action:))) { parentStore in
-                    WithViewStore(parentStore) { parentViewStore in
-                        HStack {
-                            NavigationLink {
-                                ParentView(store: parentStore)
-                            } label: {
-                                    Text(parentViewStore.model?.name ?? "-")
-                                        .font(.headline)
-                            }
-                            Spacer()
-                            HStack {
-                                Button { parentViewStore.send(.decrement) } label: { Text("-") }
-                                    .foregroundColor(Color.secondary)
-                                Text("\(parentViewStore.model?.value ?? -1)")
-                                    .frame(minWidth: 24)
-                                Button { parentViewStore.send(.increment) } label: { Text("+") }
-                                    .foregroundColor(Color.secondary)
-                            }
-                            .padding(.vertical, 10)
-                            .padding(.horizontal, 16)
-                            .background(Color(.secondarySystemBackground))
-                            .cornerRadius(15)
-                        }
-                    }
-                }
-
+            List {
+                ForEachStore(self.store.scope(state: \.models, action: Main.Action.parent(id:action:)), content: ParentCard.init(store:))
                 Spacer()
 
                 HStack {
@@ -48,15 +23,20 @@ struct MainView: View {
                     HStack {
                         Button { viewStore.send(.shared(.decrement)) } label: { Text("-") }
                             .foregroundColor(Color.secondary)
+                            .buttonStyle(PlainButtonStyle())
                         Text("\(viewStore.shared.value)")
                             .frame(minWidth: 24)
                         Button { viewStore.send(.shared(.increment)) } label: { Text("+") }
                             .foregroundColor(Color.secondary)
+                            .buttonStyle(PlainButtonStyle())
                     }
                 }
             }
             .padding()
-            .navigationBarItems(trailing: Button { viewStore.send(.fetch) } label: { Text("Fetch") })
+            .navigationBarItems(trailing: HStack {
+                Button { viewStore.send(.reset) } label: { Text("Reset") }
+                Button { viewStore.send(.fetch) } label: { Text("Fetch") }
+            })
             .navigationBarTitle(Text("Root"), displayMode: .large)
         }
     }

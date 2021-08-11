@@ -8,12 +8,12 @@ import ComposableArchitecture
 import SwiftUI
 
 struct ParentView: View {
-    var store: Store<Parent.ParentFeature, Parent.Action>
+    var store: Store<Parent.State, Parent.Action>
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
             VStack {
-                VStack {
+                List {
                     HStack {
                         Text(viewStore.model?.name ?? "-")
                             .font(.headline)
@@ -21,10 +21,12 @@ struct ParentView: View {
                         HStack {
                             Button { viewStore.send(.decrement) } label: { Text("-") }
                                 .foregroundColor(Color.secondary)
+                                .buttonStyle(PlainButtonStyle())
                             Text("\(viewStore.model?.value ?? -1)")
                                 .frame(minWidth: 24)
                             Button { viewStore.send(.increment) } label: { Text("+") }
                                 .foregroundColor(Color.secondary)
+                                .buttonStyle(PlainButtonStyle())
                         }
                         .padding(.vertical, 10)
                         .padding(.horizontal, 16)
@@ -33,31 +35,7 @@ struct ParentView: View {
                     }
                     .padding(.bottom, 32)
 
-                    ForEachStore(self.store.scope(state: \.childModels, action: Parent.Action.child(id:action:))) { childStore in
-                        WithViewStore(childStore) { childViewStore in
-                            HStack {
-                                NavigationLink {
-                                    ChildView(store: childStore)
-                                } label: {
-                                    Text(childViewStore.model?.name ?? "-")
-                                        .font(.headline)
-                                }
-                                Spacer()
-                                HStack {
-                                    Button { childViewStore.send(.decrement) } label: { Text("-") }
-                                        .foregroundColor(Color.secondary)
-                                    Text("\(childViewStore.model?.value ?? -1)")
-                                        .frame(minWidth: 24)
-                                    Button { childViewStore.send(.increment) } label: { Text("+") }
-                                        .foregroundColor(Color.secondary)
-                                }
-                                .padding(.vertical, 10)
-                                .padding(.horizontal, 16)
-                                .background(Color(.secondarySystemBackground))
-                                .cornerRadius(15)
-                            }
-                        }
-                    }
+                    ForEachStore(self.store.scope(state: \.childModels, action: Parent.Action.child(id:action:)), content: ChildCard.init(store:))
                 }
 
                 Spacer()

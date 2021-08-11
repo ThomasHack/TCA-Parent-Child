@@ -8,26 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		523C60F926BBF78A006BFB07 /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295E91626BA8237001AE136 /* Child.swift */; };
-		523C60FA26BBF78D006BFB07 /* Child+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295E91E26BA82D7001AE136 /* Child+Feature.swift */; };
 		523C60FB26BBF78E006BFB07 /* ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295E92C26BA942B001AE136 /* ChildView.swift */; };
+		5242B2C026C27B230098308C /* ParentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5242B2BF26C27B230098308C /* ParentCard.swift */; };
+		5242B2C226C27C420098308C /* ChildCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5242B2C126C27C420098308C /* ChildCard.swift */; };
+		5242B2C426C27EC30098308C /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5242B2C326C27EC30098308C /* Api.swift */; };
 		528E9EFC26BBD4140003BFCB /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528E9EFB26BBD4140003BFCB /* Main.swift */; };
 		528E9EFE26BBD41E0003BFCB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528E9EFD26BBD41E0003BFCB /* MainView.swift */; };
-		528E9F0026BBD42B0003BFCB /* Main+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528E9EFF26BBD42B0003BFCB /* Main+Feature.swift */; };
 		5295E8FF26BA819A001AE136 /* TCA_TestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295E8FE26BA819A001AE136 /* TCA_TestApp.swift */; };
 		5295E90326BA819D001AE136 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5295E90226BA819D001AE136 /* Assets.xcassets */; };
 		5295E90626BA819D001AE136 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5295E90526BA819D001AE136 /* Preview Assets.xcassets */; };
 		5295E90F26BA81CF001AE136 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 5295E90E26BA81CF001AE136 /* ComposableArchitecture */; };
 		5295E91526BA822E001AE136 /* Parent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295E91426BA822E001AE136 /* Parent.swift */; };
 		5295E91926BA8258001AE136 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295E91826BA8258001AE136 /* Shared.swift */; };
-		5295E91D26BA82C4001AE136 /* Parent+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295E91C26BA82C4001AE136 /* Parent+Feature.swift */; };
 		5295E92926BA8B28001AE136 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295E92826BA8B28001AE136 /* Mock.swift */; };
 		5295E92B26BA9331001AE136 /* ParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295E92A26BA9331001AE136 /* ParentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5242B2BF26C27B230098308C /* ParentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentCard.swift; sourceTree = "<group>"; };
+		5242B2C126C27C420098308C /* ChildCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCard.swift; sourceTree = "<group>"; };
+		5242B2C326C27EC30098308C /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		528E9EFB26BBD4140003BFCB /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		528E9EFD26BBD41E0003BFCB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		528E9EFF26BBD42B0003BFCB /* Main+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main+Feature.swift"; sourceTree = "<group>"; };
 		5295E8FB26BA819A001AE136 /* TCA Parent Child.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TCA Parent Child.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5295E8FE26BA819A001AE136 /* TCA_TestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCA_TestApp.swift; sourceTree = "<group>"; };
 		5295E90226BA819D001AE136 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -36,8 +38,6 @@
 		5295E91426BA822E001AE136 /* Parent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parent.swift; sourceTree = "<group>"; };
 		5295E91626BA8237001AE136 /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
 		5295E91826BA8258001AE136 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
-		5295E91C26BA82C4001AE136 /* Parent+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Parent+Feature.swift"; sourceTree = "<group>"; };
-		5295E91E26BA82D7001AE136 /* Child+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+Feature.swift"; sourceTree = "<group>"; };
 		5295E92826BA8B28001AE136 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		5295E92A26BA9331001AE136 /* ParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentView.swift; sourceTree = "<group>"; };
 		5295E92C26BA942B001AE136 /* ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildView.swift; sourceTree = "<group>"; };
@@ -67,8 +67,8 @@
 			isa = PBXGroup;
 			children = (
 				528E9EFB26BBD4140003BFCB /* Main.swift */,
-				528E9EFF26BBD42B0003BFCB /* Main+Feature.swift */,
 				528E9EFD26BBD41E0003BFCB /* MainView.swift */,
+				5242B2BF26C27B230098308C /* ParentCard.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -92,6 +92,7 @@
 		5295E8FD26BA819A001AE136 /* TCA Parent Child */ = {
 			isa = PBXGroup;
 			children = (
+				5242B2C326C27EC30098308C /* Api.swift */,
 				5295E92026BA82EE001AE136 /* Child */,
 				528E9EFA26BBD4070003BFCB /* Main */,
 				523C60FC26BC0A4E006BFB07 /* Mock */,
@@ -116,7 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				5295E91626BA8237001AE136 /* Child.swift */,
-				5295E91E26BA82D7001AE136 /* Child+Feature.swift */,
 				5295E92C26BA942B001AE136 /* ChildView.swift */,
 			);
 			path = Child;
@@ -125,8 +125,8 @@
 		5295E92126BA82F2001AE136 /* Parent */ = {
 			isa = PBXGroup;
 			children = (
+				5242B2C126C27C420098308C /* ChildCard.swift */,
 				5295E91426BA822E001AE136 /* Parent.swift */,
-				5295E91C26BA82C4001AE136 /* Parent+Feature.swift */,
 				5295E92A26BA9331001AE136 /* ParentView.swift */,
 			);
 			path = Parent;
@@ -224,18 +224,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5295E91D26BA82C4001AE136 /* Parent+Feature.swift in Sources */,
 				523C60F926BBF78A006BFB07 /* Child.swift in Sources */,
 				5295E91926BA8258001AE136 /* Shared.swift in Sources */,
+				5242B2C426C27EC30098308C /* Api.swift in Sources */,
 				528E9EFC26BBD4140003BFCB /* Main.swift in Sources */,
 				523C60FB26BBF78E006BFB07 /* ChildView.swift in Sources */,
 				5295E92B26BA9331001AE136 /* ParentView.swift in Sources */,
 				528E9EFE26BBD41E0003BFCB /* MainView.swift in Sources */,
-				528E9F0026BBD42B0003BFCB /* Main+Feature.swift in Sources */,
+				5242B2C226C27C420098308C /* ChildCard.swift in Sources */,
 				5295E8FF26BA819A001AE136 /* TCA_TestApp.swift in Sources */,
 				5295E92926BA8B28001AE136 /* Mock.swift in Sources */,
+				5242B2C026C27B230098308C /* ParentCard.swift in Sources */,
 				5295E91526BA822E001AE136 /* Parent.swift in Sources */,
-				523C60FA26BBF78D006BFB07 /* Child+Feature.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
